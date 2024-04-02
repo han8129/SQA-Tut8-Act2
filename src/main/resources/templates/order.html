@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Pizza</title>
+</head>
+<body>
+<h1>Pizza Order System</h1>
+<form th:action="'/confirm'" th:object="${pizza}" method="POST">
+    <label for="sizeSelect">Select Size:</label>
+    <select id="sizeSelect" th:field="*{size}" onchange="updateOption()">
+        <option value="0">Small</option>
+        <option value="1">Medium</option>
+        <option value="3">Large</option>
+    </select>
+
+    <br>
+    <p th:if="${not #strings.isEmpty(sizeErrors)}">
+        [[${ sizeErrors }]]
+    </p>
+
+    <br>
+    <label for="toppingSelect">Select Topping:</label>
+    <select id="toppingSelect" th:field="*{topping}" onchange="updateOption()">
+        <option value="0">None</option>
+        <option value="1">Pepperoni</option>
+        <option value="2">Mushroom</option>
+        <option value="3">Sea Food</option>
+    </select>
+
+    <br>
+    <p th:if="${not #strings.isEmpty(topErrors)}">
+        [[${ topErrors }]]
+    </p>
+    <br>
+    <button type="submit">Confirm Order</button>
+</form>
+<div id="orderSummary"></div>
+
+<script>
+    const optionSize = document.getElementById("sizeSelect");
+    const optionTopping = document.getElementById("toppingSelect");
+
+    function updateOption() {
+        const size = (optionSize.value);
+        const topping = (optionTopping.value);
+
+        const url = `/?size=${size}&topping=${topping}`;
+        window.location.href = url;
+    }
+</script>
+</body>
+</html>

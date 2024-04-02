@@ -18,8 +18,8 @@ spring:
 
     security:
       user:
-        name: "admin"
-        password: "password"
+        name: admin
+        password: password
 
   mail:
     host: localhost
