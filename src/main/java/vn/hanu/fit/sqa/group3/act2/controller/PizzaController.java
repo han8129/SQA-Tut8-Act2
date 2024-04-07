@@ -3,10 +3,12 @@ package vn.hanu.fit.sqa.group3.act2.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+
 import vn.hanu.fit.sqa.group3.act2.model.Pizza;
 import vn.hanu.fit.sqa.group3.act2.model.Size;
 import vn.hanu.fit.sqa.group3.act2.model.Topping;
@@ -17,10 +19,19 @@ import vn.hanu.fit.sqa.group3.act2.repository.ToppingRepository;
 import java.util.List;
 import java.util.Optional;
 
+
 @Controller
 public class PizzaController {
 
     @GetMapping("/")
+
+    public String showOrderForm() {
+        return "OrderForm"; // Thymeleaf template name
+    }
+
+    @PostMapping("/confirmOrder")
+    public String confirmOrder(@RequestParam int size, @RequestParam int topping, Model model) {
+
     public String showOrderForm(
         @RequestParam(value = "size",  defaultValue = "0") int size,
         @RequestParam(value = "topping",  defaultValue = "0") int topping,
@@ -88,6 +99,7 @@ public class PizzaController {
 
         pizzaRepository.save(new Pizza(size, topping));
 
+
         String sizeText = getSizeText(size);
         String toppingText = getToppingText(topping);
         String orderSummary = "Order Summary: " + sizeText + " pizza with " + toppingText;
@@ -107,6 +119,7 @@ public class PizzaController {
         String[] toppings = {"None", "Pepperoni", "Mushroom", "Seafood"};
         return toppings[topping];
     }
+
 
     @Autowired private ToppingRepository toppingRepository;
     @Autowired private SizeRepository sizeRepository;

@@ -11,6 +11,9 @@ public class Topping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    private String name; // Example: "Pepperoni", "Mushroom", "Seafood"
+
     public Long getId() {
         return id;
     }
@@ -37,6 +40,7 @@ public class Topping {
 
     public Topping() {}
     private int type; // Example: "Pepperoni", "Mushroom", "Seafood"
+
     private int counts; // Number of available toppings
 
 }

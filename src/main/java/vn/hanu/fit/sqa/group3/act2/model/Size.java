@@ -10,6 +10,14 @@ public class Size {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    private String name; // Example: "Small", "Medium", "Large"
+    private int counts; // Number of available pizzas for this size
+
+    // Other size-related attributes (e.g., price)
+
+    // Getters and setters
+
     private int type; // Example: "Small", "Medium", "Large"
     private int counts; // Number of available pizzas for this size
 
@@ -41,4 +49,5 @@ public class Size {
 
     // Getters and setters
     public Size() {}
+
 }
